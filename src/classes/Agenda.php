@@ -4,11 +4,6 @@ include('Contact.php');
 
 class Agenda {
     private array $contacts;
-
-    const REMOVE_MSG  = "Contact to remove?(select contact index number)";
-    //Note: Searching by surname is totally arbitry decision
-    const SEARCH_MSG = "Enter surname to search";
-    //Note: Could be .txt or json...whatever.
     const EXPORT_FILE_NAME = "contacts.txt";
 
     public function __construct() {
@@ -28,11 +23,10 @@ class Agenda {
         $this->contacts = array_values($this->contacts);
     }
 
-    public function searchContacts(): void {
-        $toSearch = readline(self::SEARCH_MSG);
-        foreach($this->contacts as $contact) {
-            if(str_contains($contact->getSurname(), $toSearch)) echo $contact;
-        }
+    public function searchBySurname(string $surname): array {
+       return array_filter($this->contacts, function(Contact $contact) use ($surname) {
+            return str_contains($contact->getSurname(), $surname);
+        });
     }
 
     public function exportContacts(): void {

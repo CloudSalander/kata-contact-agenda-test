@@ -17,7 +17,7 @@ class Menu {
             0 => $this->createContact(),
             1 => $this->showContacts(),
             2 => $this->removeContact(),
-            3 => $this->agenda->searchContacts(),
+            3 => $this->searchContacts(),
             4 => $this->agenda->exportContacts(),
             default => null
         };
@@ -52,6 +52,21 @@ class Menu {
             echo "✅ Contact removed succesfully! ".PHP_EOL;
         }
         else echo "Selected contact doesn't exists!".PHP_EOL;
+    }
+
+    private function searchContacts() {
+
+        $query = readline("Enter surname to search: "); // único dato
+        $results = $this->agenda->searchBySurname($query);
+
+        if (empty($results)) {
+            echo "No contacts found." . PHP_EOL;
+            return;
+        }
+
+        foreach ($results as $index => $contact) {
+            echo ($index+1) . ": $contact";
+        }
     }
 }
 
