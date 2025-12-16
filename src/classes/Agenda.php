@@ -23,13 +23,9 @@ class Agenda {
         return $this->contacts;
     }
 
-    public function removeContact(): void {
-        $this->showContacts();
-        $contactId = readline(self::REMOVE_MSG.PHP_EOL);
-        if($this->isValidContactId($contactId)) {
-            unset($this->contacts[$contactId]);
-            $this->contacts = array_values($this->contacts);
-        }
+    public function removeContactById(int $contactIndex): void {
+        unset($this->contacts[$contactIndex]);
+        $this->contacts = array_values($this->contacts);
     }
 
     public function searchContacts(): void {
@@ -45,10 +41,6 @@ class Agenda {
             fwrite($exportFile,$contact);
         }
         fclose($exportFile);
-    }
-
-    private function isValidContactId(int $contactId): bool {
-        return ($contactId > 0) && ($contactId < count($this->contacts));
     }
 
 }

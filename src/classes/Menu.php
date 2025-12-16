@@ -16,7 +16,7 @@ class Menu {
         match ($option) {
             0 => $this->createContact(),
             1 => $this->showContacts(),
-            2 => $this->agenda->removeContact(),
+            2 => $this->removeContact(),
             3 => $this->agenda->searchContacts(),
             4 => $this->agenda->exportContacts(),
             default => null
@@ -39,6 +39,19 @@ class Menu {
         foreach($contacts as  $index => $contact) {
             echo ($index+1).": ".$contact;
         }
+    }
+
+    private function removeContact(): void {
+        $this->showContacts();
+        $contacts = $this->agenda->getContacts();
+        $choice = intval(readline("Select contact number to remove"));
+        $keys = array_keys($contacts);
+        $idToRemove = $keys[$choice - 1] ?? null;
+        if($idToRemove !== null)  {
+            $this->agenda->removeContactById($idToRemove);
+            echo "✅ Contact removed succesfully! ".PHP_EOL;
+        }
+        else echo "Selected contact doesn't exists!".PHP_EOL;
     }
 }
 
