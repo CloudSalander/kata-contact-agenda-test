@@ -1,6 +1,6 @@
 <?php
 //Question for classrom: Can we divide more methods logic?
-include('Contact.php');
+namespace App\Domain;
 
 class Agenda {
     private array $contacts;

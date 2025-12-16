@@ -1,9 +1,15 @@
 <?php
-include('Cli/Menu.php');
-include('Domain/Agenda.php');
-include('Cli/ContactInput.php');
-include('Cli/CliInputReader.php');
-include('Infrastructure/ContactExporter.php');
+
+namespace App;
+
+
+require __DIR__ . '/vendor/autoload.php';
+
+use App\Cli\Menu;
+use App\Cli\ContactInput;
+use App\Cli\CliInputReader;
+use App\Domain\Agenda;
+use App\Infrastructure\ContactExporter;
 
 define('EXIT_CODE',5);
 define('INPUT_MSG', "Please, enter your option(0 to 5)");

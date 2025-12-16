@@ -1,4 +1,11 @@
 <?php
+namespace App\Cli;
+
+use App\Domain\Contact;
+use App\Domain\ValueObject\Name;
+use App\Domain\ValueObject\Surname;
+use App\Domain\ValueObject\Email;
+use App\Domain\ValueObject\PhoneNumber;
 class ContactInput
 {
     public function __construct(private InputReader $reader) {}
@@ -13,7 +20,7 @@ class ContactInput
                 $email = new Email($this->reader->read('Enter email'));
                 $phone = new PhoneNumber($this->reader->read('Enter phone number'));
                 return new Contact($name, $surname, $email, $phone);
-            } catch(InvalidArgumentException $e) {
+            } catch(\InvalidArgumentException $e) {
                 echo "Error: " . $e->getMessage() . PHP_EOL;
                 echo "Please try again." . PHP_EOL;
                 continue;

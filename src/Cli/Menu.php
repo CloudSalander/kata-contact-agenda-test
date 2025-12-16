@@ -1,5 +1,8 @@
 <?php
+namespace App\Cli;
 
+use App\Domain\Agenda;
+use App\Infrastructure\ContactExporter;
 enum MenuOption : int {
     case ADD_CONTACT    = 0;
     case SHOW_CONTACTS  = 1;

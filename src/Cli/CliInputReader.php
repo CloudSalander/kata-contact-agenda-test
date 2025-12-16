@@ -1,5 +1,6 @@
 <?php
-include 'InputReader.php';
+namespace App\Cli;
+
 class CliInputReader implements InputReader {
     public function read(string $msg): string {
         $line = readline($msg . ': ');

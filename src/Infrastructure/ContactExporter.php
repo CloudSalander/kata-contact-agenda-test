@@ -1,4 +1,5 @@
 <?php
+namespace App\Infrastructure;
 class ContactExporter {
     private string $filename;
 

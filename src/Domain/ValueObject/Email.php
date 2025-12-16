@@ -1,6 +1,6 @@
 <?php
-
-final class PhoneNumber
+namespace App\Domain\ValueObject;
+final class Email
 {
     private string $value;
 
@@ -8,9 +8,10 @@ final class PhoneNumber
     {
         $value = trim($value);
 
-        if (!preg_match('/^[0-9+\-\s()]+$/', $value) || preg_match_all('/\d/', $value) < 7) {
-            throw new InvalidArgumentException('Invalid phone number.');
+        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            throw new \InvalidArgumentException('Invalid email address.');
         }
+
         $this->value = $value;
     }
 
@@ -19,4 +20,3 @@ final class PhoneNumber
         return $this->value;
     }
 }
-

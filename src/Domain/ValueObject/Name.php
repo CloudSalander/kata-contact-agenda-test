@@ -1,5 +1,5 @@
-
 <?php 
+namespace App\Domain\ValueObject;
 final class Name
 {
     const MAX_NAME_LONG = 100;
@@ -10,11 +10,11 @@ final class Name
         $value = trim($value);
 
         if ($value === '') {
-            throw new InvalidArgumentException('Name cannot be empty.');
+            throw new \InvalidArgumentException('Name cannot be empty.');
         }
 
         if (strlen($value) > self::MAX_NAME_LONG) {
-            throw new InvalidArgumentException('Name too long.');
+            throw new \InvalidArgumentException('Name too long.');
         }
 
         $this->value = $value;

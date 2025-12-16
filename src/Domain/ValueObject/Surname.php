@@ -1,4 +1,5 @@
 <?php 
+namespace App\Domain\ValueObject;
 final class Surname
 {
     const MAX_SURNAME_LONG = 200;
@@ -9,11 +10,11 @@ final class Surname
         $value = trim($value);
 
         if ($value === '') {
-            throw new InvalidArgumentException('Surname cannot be empty.');
+            throw new \InvalidArgumentException('Surname cannot be empty.');
         }
 
         if (strlen($value) > self::MAX_SURNAME_LONG) {
-            throw new InvalidArgumentException('Surame too long.');
+            throw new \InvalidArgumentException('Surame too long.');
         }
 
         $this->value = $value;

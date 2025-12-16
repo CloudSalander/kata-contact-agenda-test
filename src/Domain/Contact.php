@@ -1,9 +1,11 @@
 <?php 
 
-include('value-objects/Name.php');
-include('value-objects/Surname.php');
-include('value-objects/Email.php');
-include('value-objects/PhoneNumber.php');
+namespace App\Domain;
+
+use App\Domain\ValueObject\Name;
+use App\Domain\ValueObject\Surname;
+use App\Domain\ValueObject\Email;
+use App\Domain\ValueObject\PhoneNumber;
 
 class Contact {
 

@@ -1,5 +1,5 @@
 <?php 
-
+namespace App\Cli;
 class FakeInputReader implements InputReader {
     private array $inputs;
     public function __construct(array $inputs) {
