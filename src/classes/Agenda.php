@@ -15,8 +15,8 @@ class Agenda {
         $this->contacts = [];
     }
 
-    public function createContact(): void {
-       $this->contacts[] = new Contact();
+    public function add(Contact $contact): void {
+       $this->contacts[] = $contact;
     }
 
     public function showContacts(): void {
