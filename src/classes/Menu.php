@@ -1,24 +1,50 @@
 <?php
 
+enum MenuOption : int {
+    case ADD_CONTACT    = 0;
+    case SHOW_CONTACTS  = 1;
+    case REMOVE_CONTACT = 2;
+    case SEARCH_CONTACT = 3;
+    case EXPORT_CONTACTS = 4;
+    case EXIT           = 5;
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::ADD_CONTACT     => 'Add Contact',
+            self::SHOW_CONTACTS   => 'Show Contacts',
+            self::REMOVE_CONTACT  => 'Delete Contact',
+            self::SEARCH_CONTACT  => 'Search Contact',
+            self::EXPORT_CONTACTS => 'Export Contacts',
+            self::EXIT            => 'Exit',
+        };
+    }
+}
+
 class Menu {
-    const OPTIONS = ['Add Contact','Show Contacts','Delete Contact','Search Contact','Export Contacts','Exit'];
 
     public function __construct(private Agenda $agenda, private ContactInput $contactInput, private ContactExporter $contactExporter){}
 
     public function showOptions(): void {
-        foreach(self::OPTIONS as $index => $option) {
-            echo $index." - ".$option.PHP_EOL;
+        foreach(MenuOption::cases() as $option) {
+            echo $option->value." - ".$option->label().PHP_EOL;
         }
     }
 
     public function doOption(int $option): void {
-        //TODO: Enum for options?
-        match ($option) {
-            0 => $this->createContact(),
-            1 => $this->showContacts(),
-            2 => $this->removeContact(),
-            3 => $this->searchContacts(),
-            4 => $this->exportContacts(),
+        $menuOption = MenuOption::tryFrom($option);
+
+        if ($menuOption === null) {
+            echo "Invalid option" . PHP_EOL;
+            return;
+        }
+
+        match ($menuOption) {
+            MenuOption::ADD_CONTACT => $this->createContact(),
+            MenuOption::SHOW_CONTACTS => $this->showContacts(),
+            MenuOption::REMOVE_CONTACT => $this->removeContact(),
+            MenuOption::SEARCH_CONTACT => $this->searchContacts(),
+            MenuOption::EXPORT_CONTACTS => $this->exportContacts(),
             default => null
         };
     }
@@ -54,7 +80,7 @@ class Menu {
         else echo "Selected contact doesn't exists!".PHP_EOL;
     }
 
-    private function searchContacts() {
+    private function searchContacts(): void {
 
         $query = readline("Enter surname to search: "); // único dato
         $results = $this->agenda->searchBySurname($query);
