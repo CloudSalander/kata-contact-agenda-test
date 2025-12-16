@@ -1,12 +1,13 @@
 <?php 
+namespace App\Tests;
 
-use PHPUnit\Framework\TestCase;
+use App\Tests\BaseTest;
 
-class ShowContactsTest extends TestCase
+class ShowContactsTest extends BaseTest
 {
     public function testShowContactsWhenAgendaIsEmpty()
     {
-        $agenda = new Agenda();
+        $agenda = $this->createAgenda();
 
         $contacts = $agenda->getContacts();
 
@@ -16,13 +17,13 @@ class ShowContactsTest extends TestCase
 
     public function testShowContactsWithOneContact()
     {
-        $agenda = new Agenda();
+        $agenda = $this->createAgenda();
 
-        $contact = new Contact(
-            new Name("John"),
-            new Surname("Doe"),
-            new Email("john@example.com"),
-            new PhoneNumber("600123123")
+        $contact = $this->createContact(
+            "Pepe",
+            "Lopez",
+            "pepe@pepe.com",
+            "600123123"
         );
 
         $agenda->add($contact);
@@ -35,20 +36,21 @@ class ShowContactsTest extends TestCase
 
     public function testShowContactsWithMultipleContacts()
     {
-        $agenda = new Agenda();
 
-        $contact1 = new Contact(
-            new Name("John"),
-            new Surname("Doe"),
-            new Email("john@example.com"),
-            new PhoneNumber("600123123")
+       $agenda = $this->createAgenda();
+
+        $contact1 = $this->createContact(
+            "Pepe",
+            "Lopez",
+            "pepe@pepe.com",
+            "600123123"
         );
 
-        $contact2 = new Contact(
-            new Name("Jane"),
-            new Surname("Smith"),
-            new Email("jane@example.com"),
-            new PhoneNumber("600456456")
+       $contact2 = $this->createContact(
+            "Luisa",
+            "López",
+            "luisa@luisa.com",
+            "600456456"
         );
 
         $agenda->add($contact1);
