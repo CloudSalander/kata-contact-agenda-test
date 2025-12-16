@@ -19,10 +19,8 @@ class Agenda {
        $this->contacts[] = $contact;
     }
 
-    public function showContacts(): void {
-        foreach($this->contacts as $index => $contact) {
-            echo $index.": ".$contact;
-        }
+    public function getContacts(): array {
+        return $this->contacts;
     }
 
     public function removeContact(): void {
