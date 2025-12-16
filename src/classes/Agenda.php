@@ -28,15 +28,6 @@ class Agenda {
             return str_contains($contact->getSurname(), $surname);
         });
     }
-
-    public function exportContacts(): void {
-        $exportFile = fopen(self::EXPORT_FILE_NAME,'w');
-        foreach($this->contacts as $contact) {
-            fwrite($exportFile,$contact);
-        }
-        fclose($exportFile);
-    }
-
 }
 
 ?>

@@ -3,7 +3,7 @@
 class Menu {
     const OPTIONS = ['Add Contact','Show Contacts','Delete Contact','Search Contact','Export Contacts','Exit'];
 
-    public function __construct(private Agenda $agenda, private ContactInput $contactInput){}
+    public function __construct(private Agenda $agenda, private ContactInput $contactInput, private ContactExporter $contactExporter){}
 
     public function showOptions(): void {
         foreach(self::OPTIONS as $index => $option) {
@@ -18,7 +18,7 @@ class Menu {
             1 => $this->showContacts(),
             2 => $this->removeContact(),
             3 => $this->searchContacts(),
-            4 => $this->agenda->exportContacts(),
+            4 => $this->exportContacts(),
             default => null
         };
     }
@@ -67,6 +67,17 @@ class Menu {
         foreach ($results as $index => $contact) {
             echo ($index+1) . ": $contact";
         }
+    }
+
+    private function exportContacts(): void {
+        $contacts = $this->agenda->getContacts();
+        if (empty($contacts)) {
+            echo "No contacts to export." . PHP_EOL;
+            return;
+        }
+
+        $this->contactExporter->export($contacts);
+        echo "✅ Contacts exported successfully!" . PHP_EOL;
     }
 }
 
