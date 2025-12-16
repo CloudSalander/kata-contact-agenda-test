@@ -1,9 +1,9 @@
 <?php
-include('classes/Menu.php');
-include('classes/Agenda.php');
-include('classes/ContactInput.php');
-include('classes/CliInputReader.php');
-include('classes/ContactExporter.php');
+include('Cli/Menu.php');
+include('Domain/Agenda.php');
+include('Cli/ContactInput.php');
+include('Cli/CliInputReader.php');
+include('Infrastructure/ContactExporter.php');
 
 define('EXIT_CODE',5);
 define('INPUT_MSG', "Please, enter your option(0 to 5)");
