@@ -10,9 +10,9 @@ class AddContactTest extends BaseTest
         $agenda = $this->createAgenda();
 
         $contact = $this->createContact(
-            "John",
-            "Doe",
-            "john@example.com",
+            "Pepe",
+            "Lopez",
+            "pepe@example.com",
             "600123123"
         );
 
